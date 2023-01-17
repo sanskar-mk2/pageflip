@@ -1,0 +1,15 @@
+@import url(https://fonts.bunny.net/css?family=nunito:400,600,700|playball:400);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#bg {
+    background-image: radial-gradient(circle,
+            #555555 0,
+            #222222 100%);
+}
+
+#pfp {
+    background: url(./images/richard.PNG) top / cover;
+}
