@@ -444,7 +444,14 @@
                 </ul>
             </nav>
         </div>
-        <div x-on:touchstart="tstart"  style="perspective: 1500px" x-on:touchend="tend" id="touchable" x-data="toucher" class="bg min-h-screen w-full flex md:hidden">
+        <div
+            x-on:touchstart="tstart"
+            style="perspective: 1500px"
+            x-on:touchend="tend"
+            id="touchable"
+            x-data="toucher"
+            class="bg min-h-screen w-full flex md:hidden"
+        >
             <section
                 id="page0m"
                 class="text-white bg-black min-h-screen absolute w-full flex flex-col justify-center z-50"
@@ -749,7 +756,10 @@
                     <img src="./images/cust.jpg" />
                 </div>
             </section>
-            <nav x-data class="z-50 absolute bottom-4 flex justify-center w-full">
+            <nav
+                x-data
+                class="z-50 absolute bottom-4 flex justify-center w-full"
+            >
                 <ul class="flex gap-3">
                     <template x-for="i in 4">
                         <button
