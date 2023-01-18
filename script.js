@@ -38,63 +38,26 @@ function content() {
     ];
 }
 
-// touchableElement.addEventListener(
-//     "touchstart",
-//     function (event) {
-//         touchstartX = event.changedTouches[0].screenX;
-//         touchstartY = event.changedTouches[0].screenY;
-//     },
-//     false
-// );
-
-// touchableElement.addEventListener(
-//     "touchend",
-//     function (event) {
-//         touchendX = event.changedTouches[0].screenX;
-//         touchendY = event.changedTouches[0].screenY;
-//         handleGesture();
-//     },
-//     false
-// );
-
-function handleGesture() {
-    if (touchendX < touchstartX) {
-        console.log("Swiped Left");
-    }
-
-    if (touchendX > touchstartX) {
-        console.log("Swiped Right");
-    }
-
-    if (touchendY < touchstartY) {
-        console.log("Swiped Up");
-    }
-
-    if (touchendY > touchstartY) {
-        console.log("Swiped Down");
-    }
-
-    if (touchendY === touchstartY) {
-        console.log("Tap");
-    }
-}
-
-async function slide_up(page, lock) {
+async function slide_up_m(page, lock) {
     lock.val = true;
     const tl = gsap.timeline();
     const tl2 = gsap.timeline();
+    const h = document.getElementById(page).clientHeight;
     tl.fromTo(
         `#${page}`,
         0.2,
         { y: "0px" },
-        { y: "-768px", ease: Linear.easeNone }
+        { y: `-${h}px`, ease: Power4.easeOut }
     );
-    const next_p = page.replace(/.$/, parseInt(page.slice(-1)) + 1);
+    second_last_char = page.substr(page.length - 2);
+    next_num = parseInt(second_last_char) + 1;
+    next_p = page.substr(0, page.length - 2) + next_num + "m";
+
     tl2.fromTo(
         `#${next_p}`,
         0.2,
-        { y: "768px" },
-        { y: "0px", ease: Linear.easeNone }
+        { y: `${h}px` },
+        { y: "0px", ease: Power4.easeOut }
     );
     tl2.eventCallback("onComplete", () => {
         lock.val = false;
@@ -102,21 +65,26 @@ async function slide_up(page, lock) {
     return tl;
 }
 
-async function slide_down(page, lock) {
+async function slide_down_m(page, lock) {
+    lock.val = true;
     const tl = gsap.timeline();
     const tl2 = gsap.timeline();
+    h = document.getElementById(page).clientHeight;
     tl.fromTo(
         `#${page}`,
         0.2,
         { y: "0px" },
-        { y: "768px", ease: Linear.easeNone }
+        { y: `${h}px`, ease: Power4.easeIn }
     );
-    const prev_p = page.replace(/.$/, parseInt(page.slice(-1)) - 1);
+    second_last_char = page.substr(page.length - 2);
+    prev_num = parseInt(second_last_char) - 1;
+    prev_p = page.substr(0, page.length - 2) + prev_num + "m";
+
     tl2.fromTo(
         `#${prev_p}`,
         0.2,
-        { y: "-768px" },
-        { y: "0px", ease: Linear.easeNone }
+        { y: `-${h}px` },
+        { y: "0px", ease: Power4.easeIn }
     );
     tl2.eventCallback("onComplete", () => {
         lock.val = false;
@@ -131,7 +99,7 @@ async function next_page_anim(page, lock) {
     tl.to(`#page${page}`, 1, {
         rotationY: -79,
         transformOrigin: "0% 0%",
-        ease: Linear.easeNone,
+        ease: Circ.easeIn,
     });
     tl.eventCallback("onComplete", () => {
         lock.val = false;
@@ -146,10 +114,133 @@ async function prev_page_anim(page, lock) {
     tl.to(`#page${page}`, 1, {
         rotationY: 0,
         transformOrigin: "0% 0%",
-        ease: Linear.easeNone,
+        ease: Circ.easeOut,
     });
     // release lock await on complete event
     tl.eventCallback("onComplete", () => {
+        lock.val = false;
+    });
+    return tl;
+}
+
+const toucher = () => {
+    return {
+        lock: {
+            val: false,
+        },
+        touchstartX: 0,
+        touchstartY: 0,
+        touchendX: 0,
+        touchendY: 0,
+        cp: 0,
+        cp2: 0,
+        handleGesture: function () {
+            const switches = {
+                x: 0,
+                y: 0,
+            };
+
+            if (this.touchendX !== this.touchstartX) {
+                switches.x = this.touchendX - this.touchstartX;
+            }
+
+            if (this.touchendY !== this.touchstartY) {
+                switches.y = this.touchendY - this.touchstartY;
+            }
+
+            return switches;
+        },
+
+        tstart: function (event) {
+            this.touchstartX = event.changedTouches[0].screenX;
+            this.touchstartY = event.changedTouches[0].screenY;
+        },
+        tend: async function (event) {
+            if (this.lock.val) {
+                return;
+            }
+            this.touchendX = event.changedTouches[0].screenX;
+            this.touchendY = event.changedTouches[0].screenY;
+            let { x, y } = this.handleGesture();
+            if (Math.max(Math.abs(x), Math.abs(y)) === Math.abs(y)) {
+                // vertical move
+                if (this.cp === 2) {
+                    if (y < 0) {
+                        if (this.cp2 === 4) {
+                            return;
+                        }
+                        await slide_up_m("p2" + this.cp2 + "m", this.lock);
+                        this.cp2 = this.cp2 + 1;
+                    } else if (y > 0) {
+                        if (this.cp2 === 0) {
+                            return;
+                        }
+                        await slide_down_m("p2" + this.cp2 + "m", this.lock);
+                        this.cp2 = this.cp2 - 1;
+                    }
+                }
+            } else {
+                // horizontal move
+                if (x < 0) {
+                    if (this.cp === 3) {
+                        return;
+                    } else {
+                        await next_page_anim(this.cp + "m", this.lock);
+                        this.cp = this.cp + 1;
+                    }
+                } else if (x > 1) {
+                    if (this.cp === 0) {
+                        return;
+                    } else {
+                        this.cp = this.cp - 1;
+                        await prev_page_anim(this.cp + "m", this.lock);
+                    }
+                }
+            }
+        },
+    };
+};
+
+async function slide_up(page, lock) {
+    lock.val = true;
+    const tl = gsap.timeline();
+    const tl2 = gsap.timeline();
+    tl.fromTo(
+        `#${page}`,
+        0.2,
+        { y: "0px" },
+        { y: "-768px", ease: Power4.easeOut }
+    );
+    const next_p = page.replace(/.$/, parseInt(page.slice(-1)) + 1);
+    tl2.fromTo(
+        `#${next_p}`,
+        0.2,
+        { y: "768px" },
+        { y: "0px", ease: Power4.easeOut }
+    );
+    tl2.eventCallback("onComplete", () => {
+        lock.val = false;
+    });
+    return tl;
+}
+
+async function slide_down(page, lock) {
+    const tl = gsap.timeline();
+    const tl2 = gsap.timeline();
+    tl.fromTo(
+        `#${page}`,
+        0.2,
+        { y: "0px" },
+        { y: "768px", ease: Power4.easeIn }
+    );
+    const prev_p = page.replace(/.$/, parseInt(page.slice(-1)) - 1);
+    tl2.fromTo(
+        `#${prev_p}`,
+        0.2,
+        { y: "-768px" },
+        { y: "0px", ease: Power4.easeIn }
+    );
+    tl2.eventCallback("onComplete", () => {
         lock.val = false;
     });
     return tl;
@@ -168,7 +259,7 @@ async function from_to_anim(from, to, lock) {
             tl.to(`#page${from.val}`, 1, {
                 rotationY: -79,
                 transformOrigin: "0% 0%",
-                ease: Linear.easeNone,
+                ease: Circ.easeIn,
             });
             await tl.eventCallback("onComplete", () => {
                 lock.val = false;
@@ -182,7 +273,7 @@ async function from_to_anim(from, to, lock) {
             tl.to(`#page${from.val}`, 1, {
                 rotationY: 0,
                 transformOrigin: "0% 0%",
-                ease: Linear.easeNone,
+                ease: Circ.easeOut,
             });
             await tl.eventCallback("onComplete", () => {
                 lock.val = false;
