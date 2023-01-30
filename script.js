@@ -1,9 +1,9 @@
 function content() {
     return [
         {
-            title: "Employee management card",
+            title: "Business Management",
             href: "https://goskytab.com/pos-features/lighthouse-back-office/",
-            para: "Enterprise Level Reporting & Analytics tools to you run your business, manage your employees and engage customers so you can grow your bottom line.",
+            para: "Enterprise Level Reporting & Analytics tools to run your business, manage your employees and engage customers so you can grow your bottom line.",
             img: "./images/0.png",
             pos: "bottom",
         },
@@ -15,7 +15,7 @@ function content() {
             pos: "bottom",
         },
         {
-            title: "Online Storefront card",
+            title: "Online Storefront",
             href: "https://launch.shift4shop.com/partners?oid=POSG1-S4A21",
             para: "A Premium Enterprise-Grade eCommerce Solution Completely Free For Life!",
             img: "./images/2.webp",
@@ -286,7 +286,7 @@ async function from_to_anim(from, to, lock) {
 
 // shake #swipe
 gsap.fromTo(
-    "#swipe",
+    ".swipe",
     1,
     { x: "0px" },
     { x: "10px", repeat: -1, yoyo: true, ease: Back.easeIn },

@@ -10,6 +10,6 @@
             #222222 100%);
 }
 
-#pfp {
-    background: url(./images/richard.PNG) top / cover;
+.pfp {
+    background: url(./images/profile-01.png) top / cover;
 }

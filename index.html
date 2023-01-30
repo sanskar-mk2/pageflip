@@ -60,8 +60,7 @@
                             class="bg-sky gap-3 pb-8 relative pt-16 flex items-center flex-col text-white"
                         >
                             <div
-                                class="rounded-full h-28 w-28 absolute -top-14"
-                                id="pfp"
+                                class="rounded-full h-28 w-28 absolute -top-14 pfp border-2 border-sky"
                             ></div>
                             <p class="font-bold text-4xl">Richard Fischer</p>
                             <hr class="w-1/2" />
@@ -463,8 +462,7 @@
                     class="bg-sky gap-3 pb-8 relative pt-16 flex items-center flex-col text-white"
                 >
                     <div
-                        class="rounded-full h-28 w-28 absolute -top-14"
-                        id="pfp"
+                        class="rounded-full h-28 w-28 absolute -top-14 border-2 border-sky pfp"
                     ></div>
                     <p class="font-bold text-4xl">Richard Fischer</p>
                     <hr class="w-1/2" />
@@ -685,15 +683,14 @@
                             ></button>
                         </template>
                     </ul>
-                    <span class="absolute right-2 gap-4 items-center flex -rotate-90 origin-right" x-show="cp===2 && cp2===0">
+                    <span class="absolute right-2 gap-4 items-center flex rotate-90 origin-right -bottom-32" x-show="cp===2 && cp2===0">
                     <svg
-                        id="swipe"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
-                        class="w-6 h-6 inline"
+                        class="w-6 h-6 inline swipe"
                     >
                         <path
                             stroke-linecap="round"
@@ -780,13 +777,12 @@
                 </ul>
                 <span class="absolute right-4 gap-4 items-center flex" x-show="cp===0">
                     <svg
-                        id="swipe"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
-                        class="w-6 h-6 inline"
+                        class="w-6 h-6 inline swipe"
                     >
                         <path
                             stroke-linecap="round"
