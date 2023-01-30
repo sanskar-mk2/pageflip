@@ -5,35 +5,35 @@ function content() {
             href: "https://goskytab.com/pos-features/lighthouse-back-office/",
             para: "Enterprise Level Reporting & Analytics tools to you run your business, manage your employees and engage customers so you can grow your bottom line.",
             img: "./images/0.png",
-            pos: "center",
+            pos: "bottom",
         },
         {
             title: "Business Working Capital",
             href: "https://goskytab.com/services/#!/working-capital",
             para: "A business cash advance enables you to generate the working capital you need without having to negotiate with a bank or worry about long-term credit card interest.",
             img: "./images/1.jpg",
-            pos: "center",
+            pos: "bottom",
         },
         {
             title: "Online Storefront card",
             href: "https://launch.shift4shop.com/partners?oid=POSG1-S4A21",
             para: "A Premium Enterprise-Grade eCommerce Solution Completely Free For Life!",
             img: "./images/2.webp",
-            pos: "center",
+            pos: "bottom",
         },
         {
             title: "Smart Equipment Options",
             href: "https://goskytab.com/equipment-and-processing-options/",
             para: "Choose from a wide variety of Free Point of Sale systems with no up-front costs.",
             img: "./images/cluster.png",
-            pos: "center",
+            pos: "bottom",
         },
         {
             title: "Secure Payments",
             href: "https://goskytab.com/",
             para: "Streamline operations and future-proof your business with cutting-edge POS software and state-of-the-art hardware.",
             img: "./images/sec.jpg",
-            pos: "right",
+            pos: "bottom",
         },
     ];
 }
@@ -283,3 +283,11 @@ async function from_to_anim(from, to, lock) {
     // release lock await on complete event
     return tl;
 }
+
+// shake #swipe
+gsap.fromTo(
+    "#swipe",
+    1,
+    { x: "0px" },
+    { x: "10px", repeat: -1, yoyo: true, ease: Back.easeIn },
+);
