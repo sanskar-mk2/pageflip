@@ -13,3 +13,11 @@
 .pfp {
     background: url(./images/profile-01.png) top / cover;
 }
+
+.pfp-chris {
+    background: url(./images/chris.PNG) left / contain;
+}
+
+.pfp-laura {
+    background: url(./images/laura.PNG) right / contain;
+}
