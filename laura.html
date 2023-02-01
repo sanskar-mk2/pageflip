@@ -14,11 +14,11 @@
     </head>
     <body
         style="font-family: 'Nunito', sans-serif"
-        class="min-h-screen w-screen overflow-hidden"
+        class="min-h-screen w-screen"
     >
         <div
             x-data="{cp:{val:0}, lock:{val:false}, cp2:0, content: content()}"
-            class="bg bg-gray-500 min-h-screen w-full hidden md:flex flex-col gap-4 justify-center items-center"
+            class="bg bg-gray-500 min-h-screen w-full hidden md:flex flex-col gap-4 justify-center items-center overflow-hidden"
         >
             <div class="flex gap-4 items-center">
                 <button
@@ -355,7 +355,7 @@
                                 Read Reviews
                             </a>
                         </div>
-                        <div class="grow flex items-end">
+                        <div class="grow flex items-center">
                             <img src="./images/cust.jpg" />
                         </div>
                     </div>
@@ -756,7 +756,7 @@
                         Read Reviews
                     </a>
                 </div>
-                <div class="grow flex items-end">
+                <div class="grow flex items-center">
                     <img src="./images/cust.jpg" />
                 </div>
             </section>
@@ -767,7 +767,7 @@
                 <ul class="flex gap-3">
                     <template x-for="i in 4">
                         <button
-                            class="font-bold cursor-pointer text-gray-100 rounded-full flex justify-center items-center w-3 h-3"
+                            class="font-bold cursor-pointer outline outline-1 outline-white text-gray-100 rounded-full flex justify-center items-center w-3 h-3"
                             :class="{'bg-sky':cp===i-1, 'bg-gray-800':cp!==i-1}"
                         ></button>
                     </template>
