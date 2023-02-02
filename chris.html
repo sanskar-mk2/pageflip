@@ -396,6 +396,28 @@
                         </div>
                     </div>
                     <!-- Page 3 End -->
+                    <!-- Page 4 Start -->
+                    <div
+                        id="page4"
+                        class="absolute w-cw z-0 bg-black h-ch flex flex-col justify-between"
+                        x-data="{page:4}"
+                        x-show="cp.val<page+1"
+                    >
+                        <div class="grow flex">
+                            <img src="./images/IMG_5500.jpg" />
+                        </div>
+                        <div
+                            class="text-black flex w-4/5 self-center mt-8 gap-4 flex-col grow"
+                        >
+                            <a
+                                href="https://www.cognitoforms.com/Shift4/MerchantReferralForm?entry=%7b%22YourInformation%22:%7b%22SkyTabSalesRep%22:%22SP048%22%7d%7d"
+                                class="self-end bg-sky border-sky border rounded-full px-8 py-2 text-white hover:text-sky hover:bg-transparent"
+                            >
+                                Sumbit Referral Here
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Page 4 End -->
                 </div>
                 <div class="flex flex-col gap-8">
                     <button
@@ -422,7 +444,7 @@
                     <button
                         class="hover:enabled:bg-gray-300 hover:enabled:border-gray-700 hover:enabled:text-gray-700 font-bold border-2 border-sky rounded-full text-sky flex justify-center items-center w-12 h-12"
                         @click="await next_page_anim(cp.val, lock); cp.val=cp.val+1;"
-                        :disabled="cp.val===3||lock.val"
+                        :disabled="cp.val===4||lock.val"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -464,7 +486,7 @@
             </div>
             <nav x-data class="z-50">
                 <ul class="flex gap-3">
-                    <template x-for="i in 4">
+                    <template x-for="i in 5">
                         <button
                             class="font-bold cursor-pointer text-gray-100 rounded-full flex justify-center items-center w-3 h-3"
                             :class="{'bg-sky':cp.val===i-1, 'bg-gray-300':cp.val!==i-1}"
@@ -832,12 +854,32 @@
                     <img src="./images/cust.jpg" />
                 </div>
             </section>
+            <section
+                id="page4m"
+                class="text-black bg-black flex-col min-h-screen absolute w-full flex justify-center z-10"
+                x-data="{p:4}"
+                x-show="cp<p+1"
+            >
+                <div class="grow flex items-start">
+                    <img src="./images/IMG_5500.jpg" />
+                </div>
+                <div
+                    class="text-black flex w-4/5 self-center mt-8 gap-4 flex-col grow"
+                >
+                    <a
+                        href="https://www.cognitoforms.com/Shift4/MerchantReferralForm?entry=%7b%22YourInformation%22:%7b%22SkyTabSalesRep%22:%22SP048%22%7d%7d"
+                        class="self-end bg-sky border-sky border rounded-full px-8 py-2 text-white hover:text-sky hover:bg-transparent"
+                    >
+                        Submit Referral Here
+                    </a>
+                </div>
+            </section>
             <nav
                 x-data
                 class="z-50 absolute bottom-4 flex justify-center items-center w-full"
             >
                 <ul class="flex gap-3">
-                    <template x-for="i in 4">
+                    <template x-for="i in 5">
                         <button
                             class="font-bold outline outline-1 outline-white cursor-pointer text-gray-100 rounded-full flex justify-center items-center w-3 h-3"
                             :class="{'bg-sky':cp===i-1, 'bg-gray-800':cp!==i-1}"

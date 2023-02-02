@@ -182,7 +182,7 @@ const toucher = () => {
             } else {
                 // horizontal move
                 if (x < 0) {
-                    if (this.cp === 3) {
+                    if (this.cp === 4) {
                         return;
                     } else {
                         await next_page_anim(this.cp + "m", this.lock);
