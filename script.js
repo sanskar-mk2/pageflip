@@ -45,7 +45,7 @@ async function slide_up_m(page, lock) {
     const h = document.getElementById(page).clientHeight;
     tl.fromTo(
         `#${page}`,
-        0.2,
+        1.2,
         { y: "0px" },
         { y: `-${h}px`, ease: Power4.easeOut }
     );
@@ -55,7 +55,7 @@ async function slide_up_m(page, lock) {
 
     tl2.fromTo(
         `#${next_p}`,
-        0.2,
+        1.2,
         { y: `${h}px` },
         { y: "0px", ease: Power4.easeOut }
     );
@@ -72,7 +72,7 @@ async function slide_down_m(page, lock) {
     h = document.getElementById(page).clientHeight;
     tl.fromTo(
         `#${page}`,
-        0.2,
+        1.2,
         { y: "0px" },
         { y: `${h}px`, ease: Power4.easeIn }
     );
@@ -82,7 +82,7 @@ async function slide_down_m(page, lock) {
 
     tl2.fromTo(
         `#${prev_p}`,
-        0.2,
+        1.2,
         { y: `-${h}px` },
         { y: "0px", ease: Power4.easeIn }
     );
@@ -207,14 +207,14 @@ async function slide_up(page, lock) {
     const tl2 = gsap.timeline();
     tl.fromTo(
         `#${page}`,
-        0.2,
+        1.2,
         { y: "0px" },
         { y: "-768px", ease: Power4.easeOut }
     );
     const next_p = page.replace(/.$/, parseInt(page.slice(-1)) + 1);
     tl2.fromTo(
         `#${next_p}`,
-        0.2,
+        1.2,
         { y: "768px" },
         { y: "0px", ease: Power4.easeOut }
     );
@@ -225,18 +225,19 @@ async function slide_up(page, lock) {
 }
 
 async function slide_down(page, lock) {
+    lock.val = true;
     const tl = gsap.timeline();
     const tl2 = gsap.timeline();
     tl.fromTo(
         `#${page}`,
-        0.2,
+        1.2,
         { y: "0px" },
         { y: "768px", ease: Power4.easeIn }
     );
     const prev_p = page.replace(/.$/, parseInt(page.slice(-1)) - 1);
     tl2.fromTo(
         `#${prev_p}`,
-        0.2,
+        1.2,
         { y: "-768px" },
         { y: "0px", ease: Power4.easeIn }
     );

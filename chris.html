@@ -424,7 +424,7 @@
                         x-show="cp.val===2"
                         class="-rotate-90 disabled:text-gray-200 text-sky font-bold hover:enabled:text-gray-300"
                         @click="await slide_down('p2'+cp2, lock);cp2--;"
-                        :disabled="cp2===0"
+                        :disabled="cp2===0||lock.val"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
